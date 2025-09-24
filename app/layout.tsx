@@ -26,6 +26,21 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  applicationName: "SaladTimer",
+  other: {
+    "mobile-web-app-capable": "yes",
+    "msapplication-config": "/browserconfig.xml",
+    "msapplication-TileColor": "#ef4444",
+    "msapplication-tap-highlight": "no",
+  },
+  icons: {
+    icon: [
+      { url: "/saladtimer-logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/saladtimer-logo.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/saladtimer-logo.png",
+    apple: "/saladtimer-logo.png",
+  },
   openGraph: {
     type: "website",
     siteName: "SaladTimer",
@@ -47,23 +62,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
-      <head>
-        <meta name="application-name" content="SaladTimer" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="SaladTimer" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
-        <meta name="msapplication-TileColor" content="#ef4444" />
-        <meta name="msapplication-tap-highlight" content="no" />
-
-        <link rel="apple-touch-icon" href="/saladtimer-logo.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/saladtimer-logo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/saladtimer-logo.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/saladtimer-logo.png" />
-      </head>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
