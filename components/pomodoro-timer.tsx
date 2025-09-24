@@ -152,13 +152,16 @@ export function PomodoroTimer() {
   }, [state, startTime, mode])
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="space-y-8">
         <Header />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 transition-all duration-300">
-          {/* Main Timer Section */}
-          <div className="lg:col-span-2 slide-in-up">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 transition-all duration-300">
+          <div className="lg:col-span-1 order-3 lg:order-1">
+            <YouTubeWidget />
+          </div>
+
+          <div className="lg:col-span-2 order-1 lg:order-2 slide-in-up">
             <div className="glass-smooth rounded-3xl p-8 shadow-2xl border backdrop-blur-xl">
               <div className="space-y-8">
                 <ModeSelector currentMode={mode} onModeChange={handleModeChange} disabled={state === "running"} />
@@ -174,8 +177,7 @@ export function PomodoroTimer() {
             </div>
           </div>
 
-          {/* Side Panel */}
-          <div className="space-y-6">
+          <div className="lg:col-span-1 order-2 lg:order-3 space-y-6">
             <TaskManager />
             <Notes />
           </div>
@@ -183,7 +185,6 @@ export function PomodoroTimer() {
       </div>
 
       {showConfetti && <ConfettiEffect />}
-      <YouTubeWidget />
     </div>
   )
 }
