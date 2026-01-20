@@ -22,7 +22,7 @@ export function Header() {
             <h1 className="text-3xl font-bold text-balance bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               SaladTimer
             </h1>
-            <p className="text-muted-foreground mt-1">Stay productive with the Pomodoro Technique</p>
+            <p className="text-muted-foreground mt-1">Productivity & Self-Improvement</p>
           </div>
         </div>
         <div className="w-10 h-10" />
@@ -38,7 +38,7 @@ export function Header() {
           <h1 className="text-3xl font-bold text-balance bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             SaladTimer
           </h1>
-          <p className="text-muted-foreground mt-1">Stay productive with the Pomodoro Technique</p>
+          <p className="text-muted-foreground mt-1">Productivity & Self-Improvement</p>
         </div>
       </div>
 

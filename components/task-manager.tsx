@@ -101,11 +101,11 @@ export function TaskManager() {
 
             {/* Task List */}
             {tasks.length > 0 && (
-              <div className="space-y-2 max-h-48 overflow-y-auto">
+              <div className="space-y-3 max-h-48 overflow-y-auto pr-1">
                 {tasks.map((task, index) => (
                   <div
                     key={task.id}
-                    className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-500 ease-out slide-in-up group ${
+                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 group ${
                       task.completed
                         ? "bg-muted/50 border-muted scale-95 opacity-75"
                         : "bg-background/50 border-border hover:bg-muted/30 hover:scale-[1.02] hover:shadow-md"

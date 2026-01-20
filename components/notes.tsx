@@ -176,7 +176,7 @@ export function Notes() {
               </div>
             )}
 
-            <div className="space-y-3 max-h-96 overflow-y-auto">
+            <div className="space-y-4 max-h-96 overflow-y-auto pr-1">
               {notes.length === 0 ? (
                 <div className="text-center py-8 text-muted-foreground">
                   <FileText className="h-12 w-12 mx-auto mb-3 opacity-50" />
@@ -184,7 +184,7 @@ export function Notes() {
                 </div>
               ) : (
                 notes.map((note) => (
-                  <div key={note.id} className="border rounded-lg p-4 bg-background/50">
+                  <div key={note.id} className="border rounded-xl p-5 bg-background/50">
                     {editingNote === note.id ? (
                       <EditNoteForm note={note} onSave={updateNote} onCancel={() => setEditingNote(null)} />
                     ) : (

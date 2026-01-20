@@ -29,6 +29,8 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
         return "text-short-break"
       case "longBreak":
         return "text-long-break"
+      case "custom":
+        return "text-purple-500"
       default:
         return "text-pomodoro"
     }
@@ -42,8 +44,23 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
         return "stroke-short-break"
       case "longBreak":
         return "stroke-long-break"
+      case "custom":
+        return "stroke-purple-500"
       default:
         return "stroke-pomodoro"
+    }
+  }
+
+  const getModeLabel = () => {
+    switch (mode) {
+      case "shortBreak":
+        return "Short Break"
+      case "longBreak":
+        return "Long Break"
+      case "custom":
+        return "Custom Timer"
+      default:
+        return mode.charAt(0).toUpperCase() + mode.slice(1)
     }
   }
 
@@ -92,8 +109,8 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
           <div className={`text-6xl font-mono font-bold ${getModeColor()} transition-all duration-200 ease-out`}>
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
-          <div className="text-sm text-muted-foreground mt-2 capitalize transition-all duration-200 opacity-80">
-            {mode === "shortBreak" ? "Short Break" : mode === "longBreak" ? "Long Break" : mode}
+          <div className="text-sm text-muted-foreground mt-2 transition-all duration-200 opacity-80">
+            {getModeLabel()}
           </div>
         </div>
       </div>
