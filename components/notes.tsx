@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { FileText, ChevronDown, ChevronUp, Plus, Download, Trash2, Edit3 } from "lucide-react"
+import { recordReflection } from "@/lib/activity-tracker"
 
 interface Note {
   id: string
@@ -59,6 +60,7 @@ export function Notes() {
     }
 
     setNotes((prev) => [newNote, ...prev])
+    recordReflection() // Track reflection for Lock-In Calendar
     setNewNoteTitle("")
     setNewNoteContent("")
     setIsCreating(false)

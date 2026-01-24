@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Plus, Check, X, ListTodo, ChevronDown, ChevronUp } from "lucide-react"
+import { recordTaskCompletion } from "@/lib/activity-tracker"
 
 interface Task {
   id: string
@@ -33,6 +34,11 @@ export function TaskManager() {
   }
 
   const toggleTask = (id: string) => {
+    const task = tasks.find((t) => t.id === id)
+    if (task && !task.completed) {
+      // Only record when completing a task (not uncompleting)
+      recordTaskCompletion()
+    }
     setTasks(tasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)))
   }
 

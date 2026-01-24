@@ -9,6 +9,7 @@ import { ConfettiEffect } from "./confetti-effect"
 import { TaskManager } from "./task-manager"
 import { Notes } from "./notes"
 import { YouTubeWidget } from "./youtube-widget"
+import { recordFocusSession } from "@/lib/activity-tracker"
 
 export type TimerMode = "pomodoro" | "shortBreak" | "longBreak" | "custom"
 export type TimerState = "idle" | "running" | "paused"
@@ -149,6 +150,7 @@ export function PomodoroTimer() {
 
           if (mode === "pomodoro") {
             setCompletedSessions((prev) => prev + 1)
+            recordFocusSession() // Track completed Pomodoro session
             setShowConfetti(true)
             setTimeout(() => setShowConfetti(false), 3000)
 
@@ -199,14 +201,11 @@ export function PomodoroTimer() {
   }, [state, startTime, currentDuration])
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-5xl mx-auto">
       <div className="space-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 transition-all duration-300">
-          <div className="lg:col-span-1 order-3 lg:order-1">
-            <YouTubeWidget />
-          </div>
-
-          <div className="lg:col-span-2 order-1 lg:order-2 slide-in-up">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 transition-all duration-300">
+          {/* Main Timer Section */}
+          <div className="lg:col-span-2 order-1 slide-in-up">
             <div className="glass-smooth rounded-3xl p-8 shadow-2xl border backdrop-blur-xl">
               <div className="space-y-8">
                 <ModeSelector
@@ -228,12 +227,16 @@ export function PomodoroTimer() {
             </div>
           </div>
 
-          <div className="lg:col-span-1 order-2 lg:order-3 space-y-6">
+          {/* Side Panel */}
+          <div className="lg:col-span-1 order-2 space-y-6">
             <TaskManager />
             <Notes />
           </div>
         </div>
       </div>
+
+      {/* Floating YouTube Widget */}
+      <YouTubeWidget />
 
       {showConfetti && <ConfettiEffect />}
     </div>
