@@ -35,55 +35,42 @@ export function PomodoroTimer() {
   const progress = useMemo(() => ((currentDuration - timeLeft) / currentDuration) * 100, [currentDuration, timeLeft])
 
   const playStartTickSound = useCallback(() => {
+    if (typeof window === 'undefined') return
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
-      const oscillator = audioContext.createOscillator()
-      const gainNode = audioContext.createGain()
-
-      oscillator.connect(gainNode)
-      gainNode.connect(audioContext.destination)
-
-      oscillator.frequency.setValueAtTime(600, audioContext.currentTime)
-      oscillator.type = "sine"
-
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime)
-      gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.02)
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15)
-
-      oscillator.start(audioContext.currentTime)
-      oscillator.stop(audioContext.currentTime + 0.15)
-    } catch (error) {
-      // Audio not supported
+      const context = new (window.AudioContext || (window as any).webkitAudioContext)()
+      const osc = context.createOscillator()
+      const gain = context.createGain()
+      osc.connect(gain)
+      gain.connect(context.destination)
+      osc.frequency.value = 600
+      osc.type = "sine"
+      gain.gain.setValueAtTime(0.2, context.currentTime)
+      gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.15)
+      osc.start(context.currentTime)
+      osc.stop(context.currentTime + 0.15)
+    } catch (e) {
+      // Silent fail
     }
   }, [])
 
   const playCompletionTickingSound = useCallback(() => {
+    if (typeof window === 'undefined') return
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
-
-      for (let i = 0; i < 20; i++) {
-        const tickTime = audioContext.currentTime + i * 0.5
-
-        const oscillator = audioContext.createOscillator()
-        const gainNode = audioContext.createGain()
-
-        oscillator.connect(gainNode)
-        gainNode.connect(audioContext.destination)
-
-        const frequency = i % 2 === 0 ? 440 : 350
-        oscillator.frequency.setValueAtTime(frequency, tickTime)
-        oscillator.type = "sine"
-
-        const volumeFactor = 1 - i / 25
-        gainNode.gain.setValueAtTime(0, tickTime)
-        gainNode.gain.linearRampToValueAtTime(0.15 * volumeFactor, tickTime + 0.02)
-        gainNode.gain.exponentialRampToValueAtTime(0.01, tickTime + 0.1)
-
-        oscillator.start(tickTime)
-        oscillator.stop(tickTime + 0.1)
+      const context = new (window.AudioContext || (window as any).webkitAudioContext)()
+      for (let i = 0; i < 10; i++) {
+        const t = context.currentTime + i * 0.1
+        const osc = context.createOscillator()
+        const gain = context.createGain()
+        osc.connect(gain)
+        gain.connect(context.destination)
+        osc.frequency.value = i % 2 === 0 ? 440 : 350
+        gain.gain.setValueAtTime(0.1, t)
+        gain.gain.exponentialRampToValueAtTime(0.01, t + 0.08)
+        osc.start(t)
+        osc.stop(t + 0.08)
       }
-    } catch (error) {
-      // Audio not supported
+    } catch (e) {
+      // Silent fail
     }
   }, [])
 
@@ -145,15 +132,13 @@ export function PomodoroTimer() {
           setTimeLeft(0)
           setState("idle")
           setStartTime(null)
-
           playCompletionTickingSound()
 
           if (mode === "pomodoro") {
             setCompletedSessions((prev) => prev + 1)
-            recordFocusSession() // Track completed Pomodoro session
+            recordFocusSession()
             setShowConfetti(true)
-            setTimeout(() => setShowConfetti(false), 3000)
-
+            setTimeout(() => setShowConfetti(false), 2000)
             const nextSession = completedSessions + 1
             if (nextSession % 4 === 0) {
               handleModeChange("longBreak")
@@ -168,7 +153,7 @@ export function PomodoroTimer() {
         } else {
           setTimeLeft(remaining)
         }
-      }, 200)
+      }, 500)
     }
 
     return () => {

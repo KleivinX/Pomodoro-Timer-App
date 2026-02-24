@@ -22,7 +22,7 @@ export function Navigation() {
 
   const handleLogout = async () => {
     await signOut()
-    router.push('/login')
+    router.push('/signup')
   }
 
   return (

@@ -4,91 +4,91 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Making light mode more greyish and easier on the eyes */
-  --background: oklch(0.96 0.008 120); /* More greyish instead of pure white */
-  --foreground: oklch(0.25 0.015 240); /* Softer dark text */
-  --card: oklch(0.94 0.012 120); /* More greyish card background */
-  --card-foreground: oklch(0.25 0.015 240);
-  --popover: oklch(0.94 0.012 120);
-  --popover-foreground: oklch(0.25 0.015 240);
-  --primary: oklch(0.3 0.025 240); /* Softer primary */
-  --primary-foreground: oklch(0.96 0.008 120);
-  --secondary: oklch(0.92 0.015 120); /* More greyish secondary */
-  --secondary-foreground: oklch(0.3 0.025 240);
-  --muted: oklch(0.9 0.02 120); /* More greyish muted */
-  --muted-foreground: oklch(0.55 0.025 240); /* Less harsh muted text */
-  --accent: oklch(0.92 0.015 120);
-  --accent-foreground: oklch(0.3 0.025 240);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0.025 120); /* More greyish borders */
-  --input: oklch(0.88 0.025 120);
-  --ring: oklch(0.65 0.06 240); /* Softer focus rings */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Gold-based color palette */
+  --background: #FFFFFF;
+  --foreground: #2D3436;
+  --card: #F5B041;
+  --card-foreground: #2D3436;
+  --popover: #F5B041;
+  --popover-foreground: #2D3436;
+  --primary: #F5B041;
+  --primary-foreground: #2D3436;
+  --secondary: #D35400;
+  --secondary-foreground: #FFFFFF;
+  --muted: #E8D0B8;
+  --muted-foreground: #2D3436;
+  --accent: #00BFA5;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E74C3C;
+  --destructive-foreground: #FFFFFF;
+  --border: #D35400;
+  --input: #F5B041;
+  --ring: #00BFA5;
+  --chart-1: #F5B041;
+  --chart-2: #D35400;
+  --chart-3: #00BFA5;
+  --chart-4: #E74C3C;
+  --chart-5: #2D3436;
   --radius: 0.625rem;
-  --sidebar: oklch(0.93 0.015 120); /* More greyish sidebar */
-  --sidebar-foreground: oklch(0.25 0.015 240);
-  --sidebar-primary: oklch(0.3 0.025 240);
-  --sidebar-primary-foreground: oklch(0.96 0.008 120);
-  --sidebar-accent: oklch(0.92 0.015 120);
-  --sidebar-accent-foreground: oklch(0.3 0.025 240);
-  --sidebar-border: oklch(0.88 0.025 120);
-  --sidebar-ring: oklch(0.65 0.06 240);
+  --sidebar: #F5B041;
+  --sidebar-foreground: #2D3436;
+  --sidebar-primary: #D35400;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #00BFA5;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #D35400;
+  --sidebar-ring: #00BFA5;
 
-  /* Added mode-specific colors for pomodoro, short break, and long break */
-  --pomodoro: oklch(0.75 0.15 15); /* Light red */
-  --pomodoro-foreground: oklch(0.98 0 0);
-  --short-break: oklch(0.75 0.15 140); /* Light green */
-  --short-break-foreground: oklch(0.98 0 0);
-  --long-break: oklch(0.75 0.15 240); /* Light blue */
-  --long-break-foreground: oklch(0.98 0 0);
+  /* Mode-specific colors */
+  --pomodoro: #E74C3C;
+  --pomodoro-foreground: #FFFFFF;
+  --short-break: #00BFA5;
+  --short-break-foreground: #FFFFFF;
+  --long-break: #D35400;
+  --long-break-foreground: #FFFFFF;
 }
 
 .dark {
-  --background: oklch(0.12 0.015 240); /* Softer dark background with slight blue tint */
-  --foreground: oklch(0.95 0.01 60); /* Softer white text with warm tint */
-  --card: oklch(0.15 0.02 240); /* Softer card background */
-  --card-foreground: oklch(0.95 0.01 60);
-  --popover: oklch(0.15 0.02 240);
-  --popover-foreground: oklch(0.95 0.01 60);
-  --primary: oklch(0.9 0.02 60); /* Softer primary */
-  --primary-foreground: oklch(0.15 0.02 240);
-  --secondary: oklch(0.22 0.025 240); /* Softer secondary */
-  --secondary-foreground: oklch(0.9 0.02 60);
-  --muted: oklch(0.25 0.03 240); /* Softer muted */
-  --muted-foreground: oklch(0.65 0.02 60); /* Less harsh muted text */
-  --accent: oklch(0.22 0.025 240);
-  --accent-foreground: oklch(0.9 0.02 60);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.3 0.03 240); /* Softer borders */
-  --input: oklch(0.3 0.03 240);
-  --ring: oklch(0.5 0.05 60); /* Softer focus rings */
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.18 0.025 240); /* Softer sidebar */
-  --sidebar-foreground: oklch(0.95 0.01 60);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.95 0.01 60);
-  --sidebar-accent: oklch(0.25 0.03 240);
-  --sidebar-accent-foreground: oklch(0.9 0.02 60);
-  --sidebar-border: oklch(0.3 0.03 240);
-  --sidebar-ring: oklch(0.5 0.05 60);
+  --background: #1A1A1A;
+  --foreground: #FFFFFF;
+  --card: #D35400;
+  --card-foreground: #FFFFFF;
+  --popover: #D35400;
+  --popover-foreground: #FFFFFF;
+  --primary: #F5B041;
+  --primary-foreground: #2D3436;
+  --secondary: #00BFA5;
+  --secondary-foreground: #FFFFFF;
+  --muted: #2D3436;
+  --muted-foreground: #FFFFFF;
+  --accent: #00BFA5;
+  --accent-foreground: #2D3436;
+  --destructive: #E74C3C;
+  --destructive-foreground: #FFFFFF;
+  --border: #2D3436;
+  --input: #2D3436;
+  --ring: #00BFA5;
+  --chart-1: #F5B041;
+  --chart-2: #D35400;
+  --chart-3: #00BFA5;
+  --chart-4: #E74C3C;
+  --chart-5: #FFFFFF;
+  --sidebar: #2D3436;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #F5B041;
+  --sidebar-primary-foreground: #2D3436;
+  --sidebar-accent: #00BFA5;
+  --sidebar-accent-foreground: #2D3436;
+  --sidebar-border: #2D3436;
+  --sidebar-ring: #00BFA5;
 
-  /* Dark mode versions of mode-specific colors */
-  --pomodoro: oklch(0.6 0.2 15); /* Darker red for dark mode */
-  --pomodoro-foreground: oklch(0.98 0 0);
-  --short-break: oklch(0.6 0.2 140); /* Darker green for dark mode */
-  --short-break-foreground: oklch(0.98 0 0);
-  --long-break: oklch(0.6 0.2 240); /* Darker blue for dark mode */
-  --long-break-foreground: oklch(0.98 0 0);
+  /* Dark mode mode-specific colors */
+  --pomodoro: #E74C3C;
+  --pomodoro-foreground: #FFFFFF;
+  --short-break: #00BFA5;
+  --short-break-foreground: #FFFFFF;
+  --long-break: #D35400;
+  --long-break-foreground: #FFFFFF;
 }
 
 @theme inline {
@@ -146,6 +146,10 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  button {
+    @apply font-medium;
+  }
 }
 
 /* Custom animations */
@@ -189,24 +193,18 @@
   animation: slide-in-up 0.3s ease-out forwards;
 }
 
-/* Simplified transitions for better performance */
-* {
-  transition-property: color, background-color, border-color, opacity, transform;
-  transition-timing-function: ease-out;
-  transition-duration: 150ms;
-}
-
+/* Optimized for performance - only animate when necessary */
 .btn-smooth {
-  transition: all 0.2s ease-out;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+  will-change: auto;
 }
 
 .btn-smooth:hover {
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .btn-smooth:active {
-  transform: translateY(0px);
-  transition-duration: 0.05s;
+  transform: none;
 }
 
 .glass-smooth {
@@ -230,9 +228,9 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
-/* Smooth scrolling for the entire page */
+/* Auto scrolling for performance */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Enhanced focus states for accessibility */

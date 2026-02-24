@@ -45,26 +45,16 @@ export function LockInCalendarView() {
   // Create a 7-column calendar grid for 30 days
   const weeks = Array.from({ length: Math.ceil(30 / 7) }, (_, i) => lockInHistory.slice(i * 7, (i + 1) * 7))
 
-  const getLevelColor = (level: 'none' | 'partial' | 'locked') => {
-    switch (level) {
-      case 'locked':
-        return 'bg-emerald-500/20 border-emerald-500'
-      case 'partial':
-        return 'bg-amber-500/20 border-amber-500'
-      case 'none':
-        return 'bg-muted border-border'
-    }
+  const levelColors = {
+    locked: 'bg-accent border-accent',
+    partial: 'bg-primary border-primary',
+    none: 'bg-muted border-border'
   }
 
-  const getLevelIcon = (level: 'none' | 'partial' | 'locked') => {
-    switch (level) {
-      case 'locked':
-        return <Flame className="w-4 h-4 text-emerald-500" />
-      case 'partial':
-        return <Zap className="w-4 h-4 text-amber-500" />
-      case 'none':
-        return null
-    }
+  const levelIcons = {
+    locked: <Flame className="w-4 h-4 text-accent" />,
+    partial: <Zap className="w-4 h-4 text-primary" />,
+    none: null
   }
 
   return (
@@ -109,13 +99,12 @@ export function LockInCalendarView() {
                 {week.map((score, dayIndex) => (
                   <div
                     key={`${weekIndex}-${dayIndex}`}
-                    className={`aspect-square rounded-lg border-2 flex items-center justify-center transition-all hover:scale-110 cursor-pointer ${getLevelColor(score.lockInLevel)}`}
+                    className={`aspect-square rounded-lg border-2 flex items-center justify-center cursor-pointer ${levelColors[score.lockInLevel]}`}
                     title={`${score.date}: ${score.focusSessions} sessions, ${score.tasksCompleted} tasks, ${score.xpEarned} XP`}
                   >
-                    {getLevelIcon(score.lockInLevel)}
+                    {levelIcons[score.lockInLevel]}
                   </div>
                 ))}
-                {/* Fill empty spaces */}
                 {week.length < 7 &&
                   Array.from({ length: 7 - week.length }).map((_, i) => (
                     <div key={`empty-${i}`} className="aspect-square" />
