@@ -6,14 +6,7 @@ import { useAuth } from '@/lib/auth-context'
 import { Navigation } from '@/components/navigation'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
-  const { user, loading } = useAuth()
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/login')
-    }
-  }, [user, loading, router])
+  const { loading } = useAuth()
 
   if (loading) {
     return (
@@ -24,10 +17,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </div>
       </div>
     )
-  }
-
-  if (!user) {
-    return null
   }
 
   return (

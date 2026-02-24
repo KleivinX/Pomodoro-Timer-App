@@ -7,14 +7,21 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { supabase } from '@/lib/supabase'
+import { useAuth } from '@/lib/auth-context'
 import { toast } from 'sonner'
 
 export default function SignupPage() {
   const router = useRouter()
+  const { signInAsGuest } = useAuth()
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
+
+  const handleGuestMode = () => {
+    signInAsGuest()
+    router.push('/dashboard')
+  }
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -163,7 +170,15 @@ export default function SignupPage() {
             Sign up with Google
           </Button>
 
-
+          <Button
+            type="button"
+            variant="ghost"
+            className="w-full"
+            onClick={handleGuestMode}
+            disabled={loading}
+          >
+            Continue as Guest
+          </Button>
         </CardContent>
       </Card>
     </div>

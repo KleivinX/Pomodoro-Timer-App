@@ -8,7 +8,9 @@ interface AuthContextType {
   user: User | null
   session: Session | null
   loading: boolean
+  isGuest: boolean
   signOut: () => Promise<void>
+  signInAsGuest: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -17,8 +19,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isGuest, setIsGuest] = useState(false)
 
   useEffect(() => {
+    // Check if guest mode is enabled
+    const guestMode = localStorage.getItem('crumbo_guest_mode') === 'true'
+    setIsGuest(guestMode)
+
     // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
@@ -39,10 +46,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut()
+    localStorage.removeItem('crumbo_guest_mode')
+    setIsGuest(false)
+  }
+
+  const signInAsGuest = () => {
+    localStorage.setItem('crumbo_guest_mode', 'true')
+    setIsGuest(true)
   }
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, isGuest, signOut, signInAsGuest }}>
       {children}
     </AuthContext.Provider>
   )

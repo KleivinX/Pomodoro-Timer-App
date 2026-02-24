@@ -6,17 +6,17 @@ import { useAuth } from '@/lib/auth-context'
 
 export default function Home() {
   const router = useRouter()
-  const { user, loading } = useAuth()
+  const { user, loading, isGuest } = useAuth()
 
   useEffect(() => {
     if (!loading) {
-      if (user) {
+      if (user || isGuest) {
         router.push('/dashboard')
       } else {
         router.push('/signup')
       }
     }
-  }, [user, loading, router])
+  }, [user, loading, isGuest, router])
 
   return null
 }
