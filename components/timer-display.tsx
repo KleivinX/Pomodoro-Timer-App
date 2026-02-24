@@ -21,34 +21,12 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
 
   const formatTime = (time: number) => time.toString().padStart(2, "0")
 
-  const getModeColor = () => {
-    switch (mode) {
-      case "pomodoro":
-        return "text-pomodoro"
-      case "shortBreak":
-        return "text-short-break"
-      case "longBreak":
-        return "text-long-break"
-      case "custom":
-        return "text-purple-500"
-      default:
-        return "text-pomodoro"
-    }
-  }
-
-  const getProgressColor = () => {
-    switch (mode) {
-      case "pomodoro":
-        return "stroke-pomodoro"
-      case "shortBreak":
-        return "stroke-short-break"
-      case "longBreak":
-        return "stroke-long-break"
-      case "custom":
-        return "stroke-purple-500"
-      default:
-        return "stroke-pomodoro"
-    }
+  // #E74C3C red, #00BFA5 teal, #D35400 caramel, #2D3436 dark
+  const modeColors: Record<TimerMode, { text: string; stroke: string }> = {
+    pomodoro:   { text: "text-destructive",  stroke: "#E74C3C" },
+    shortBreak: { text: "text-accent",       stroke: "#00BFA5" },
+    longBreak:  { text: "text-secondary",    stroke: "#D35400" },
+    custom:     { text: "text-foreground",   stroke: "#2D3436" },
   }
 
   const getModeLabel = () => {
@@ -71,62 +49,46 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
     return { radius: r, circumference: c, strokeDashoffset: offset }
   }, [progress])
 
+  const { text: textColor, stroke: strokeColor } = modeColors[mode]
+
   return (
     <div className="flex flex-col items-center space-y-6">
       {/* Circular Progress Ring */}
-      <div className="relative float">
-        <svg className="transform -rotate-90 w-64 h-64 transition-all duration-300" width="256" height="256">
+      <div className="relative">
+        <svg className="-rotate-90 w-64 h-64" width="256" height="256">
           {/* Background circle */}
-          <circle
-            cx="128"
-            cy="128"
-            r={radius}
-            stroke="currentColor"
-            strokeWidth="8"
-            fill="transparent"
-            className="text-muted/30 transition-all duration-200"
-          />
+          <circle cx="128" cy="128" r={radius} stroke="#E8D0B8" strokeWidth="10" fill="transparent" />
           {/* Progress circle */}
           <circle
             cx="128"
             cy="128"
             r={radius}
-            stroke="currentColor"
-            strokeWidth="8"
+            stroke={strokeColor}
+            strokeWidth="10"
             fill="transparent"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
-            className={`${getProgressColor()} transition-all duration-300 ease-out`}
-            style={{
-              transitionProperty: "stroke-dashoffset",
-            }}
           />
         </svg>
 
         {/* Timer Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className={`text-6xl font-mono font-bold ${getModeColor()} transition-all duration-200 ease-out`}>
+          <div className={`text-6xl font-mono font-bold ${textColor}`}>
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
-          <div className="text-sm text-muted-foreground mt-2 transition-all duration-200 opacity-80">
-            {getModeLabel()}
-          </div>
+          <div className="text-sm text-muted-foreground mt-2 font-medium">{getModeLabel()}</div>
         </div>
       </div>
 
       {/* Status Indicator */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <div
-          className={`w-3 h-3 rounded-full transition-all duration-300 ease-out ${
-            state === "running"
-              ? "bg-green-500 animate-pulse shadow-lg shadow-green-500/50"
-              : state === "paused"
-                ? "bg-yellow-500 shadow-lg shadow-yellow-500/50"
-                : "bg-muted shadow-sm"
+          className={`w-2.5 h-2.5 rounded-full ${
+            state === "running" ? "bg-accent animate-pulse" : state === "paused" ? "bg-primary" : "bg-muted-foreground/40"
           }`}
         />
-        <span className="text-sm text-muted-foreground capitalize transition-all duration-200 font-medium">
+        <span className="text-sm text-muted-foreground font-medium capitalize">
           {state === "idle" ? "Ready to start" : state}
         </span>
       </div>

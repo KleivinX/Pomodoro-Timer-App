@@ -18,30 +18,26 @@ const modes = [
   {
     id: "pomodoro" as TimerMode,
     label: "Pomodoro",
-    emoji: "🍅",
-    color: "bg-pomodoro hover:bg-pomodoro/90 text-pomodoro-foreground",
-    description: "25 min focus session",
+    description: "25 min focus",
+    activeClass: "bg-destructive text-white border-destructive",
   },
   {
     id: "shortBreak" as TimerMode,
     label: "Short Break",
-    emoji: "☕",
-    color: "bg-short-break hover:bg-short-break/90 text-short-break-foreground",
     description: "5 min break",
+    activeClass: "bg-accent text-white border-accent",
   },
   {
     id: "longBreak" as TimerMode,
     label: "Long Break",
-    emoji: "🛋️",
-    color: "bg-long-break hover:bg-long-break/90 text-long-break-foreground",
     description: "15 min break",
+    activeClass: "bg-secondary text-white border-secondary",
   },
   {
     id: "custom" as TimerMode,
     label: "Custom",
-    emoji: "⏱️",
-    color: "bg-purple-500 hover:bg-purple-600 text-white",
     description: "Set your time",
+    activeClass: "bg-foreground text-background border-foreground",
   },
 ]
 
@@ -81,37 +77,21 @@ export function ModeSelector({
           const isCustom = mode.id === "custom"
 
           return (
-            <Button
+            <button
               key={mode.id}
               onClick={() => onModeChange(mode.id)}
               disabled={disabled}
-              variant={isActive ? "default" : "outline"}
               className={`
-                flex-1 h-auto p-4 rounded-2xl transition-all duration-200 ease-out group btn-smooth relative overflow-hidden
-                ${isActive ? `${mode.color} shadow-lg scale-105` : "hover:scale-102 hover:shadow-md glass-smooth"}
-                ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+                flex-1 px-3 py-3 rounded-xl border-2 font-semibold text-sm transition-colors
+                ${isActive ? mode.activeClass : "border-border bg-background text-foreground hover:border-primary hover:bg-primary/10"}
+                ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
               `}
             >
-              <div className="flex flex-col items-center gap-2 relative z-10">
-                <span className="text-2xl transition-all duration-200 group-hover:scale-110">{mode.emoji}</span>
-                <div className="text-center">
-                  <div
-                    className={`font-semibold transition-all duration-200 ${
-                      isActive ? "text-current" : "text-foreground"
-                    }`}
-                  >
-                    {mode.label}
-                  </div>
-                  <div
-                    className={`text-xs transition-all duration-200 ${
-                      isActive ? "text-current opacity-80" : "text-muted-foreground group-hover:opacity-100"
-                    }`}
-                  >
-                    {isCustom ? formatCustomDuration() : mode.description}
-                  </div>
-                </div>
+              <div className="font-semibold">{mode.label}</div>
+              <div className={`text-xs mt-0.5 ${isActive ? "opacity-80" : "text-muted-foreground"}`}>
+                {isCustom ? formatCustomDuration() : mode.description}
               </div>
-            </Button>
+            </button>
           )
         })}
       </div>

@@ -158,10 +158,7 @@ export function YouTubeWidget() {
         <Button
           onClick={toggleWidget}
           size="lg"
-          className="rounded-full w-14 h-14 shadow-2xl bg-red-500 hover:bg-red-600 text-white border-0 transition-all duration-200"
-          style={{
-            boxShadow: "0 0 30px rgba(239, 68, 68, 0.4), 0 10px 25px rgba(0, 0, 0, 0.15)",
-          }}
+          className="rounded-full w-14 h-14 shadow-lg bg-accent hover:bg-accent/90 text-white border-0"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Music className="w-6 h-6" />}
         </Button>
@@ -170,7 +167,7 @@ export function YouTubeWidget() {
       {/* Mini Player (when minimized but open) */}
       {isOpen && isMinimized && (
         <div className="fixed bottom-6 left-24 z-40">
-          <Card className="glass-smooth border backdrop-blur-xl shadow-xl p-3 flex items-center gap-3">
+          <Card className="border-2 border-border bg-card shadow-lg p-3 flex items-center gap-3">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
               <span className="text-sm font-medium truncate max-w-32">{getCurrentVideoName()}</span>
@@ -221,7 +218,7 @@ export function YouTubeWidget() {
             : "opacity-0 translate-y-8 scale-95 pointer-events-none"
         }`}
       >
-        <Card className="glass-smooth border backdrop-blur-xl shadow-2xl">
+        <Card className="border-2 border-border bg-card shadow-xl">
           <div className="p-4">
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
@@ -353,7 +350,7 @@ export function YouTubeWidget() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-10 w-10 p-0 bg-red-500 hover:bg-red-600 text-white rounded-full"
+                  className="h-10 w-10 p-0 bg-accent hover:bg-accent/90 text-white rounded-full"
                   onClick={() => setIsPlaying(!isPlaying)}
                 >
                   {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}

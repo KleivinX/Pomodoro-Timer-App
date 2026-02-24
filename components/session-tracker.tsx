@@ -8,7 +8,7 @@ export function SessionTracker({ completedSessions }: SessionTrackerProps) {
   const sessions = Array.from({ length: 8 }, (_, i) => i < completedSessions)
 
   return (
-    <div className="glass rounded-2xl p-6 text-center">
+    <div className="rounded-2xl p-6 text-center border-2 border-border bg-card shadow-md">
       <h3 className="text-lg font-semibold mb-4">Completed Sessions</h3>
 
       <div className="flex items-center justify-center gap-2 mb-4">

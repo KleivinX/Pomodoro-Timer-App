@@ -108,8 +108,7 @@ export function Notes() {
 
   return (
     <Card
-      className="glass-smooth rounded-2xl p-6 shadow-lg border backdrop-blur-xl slide-in-right"
-      style={{ animationDelay: "100ms" }}
+      className="rounded-2xl p-6 border-2 border-border bg-card shadow-md"
     >
       <div className="space-y-4">
         {/* Header */}
