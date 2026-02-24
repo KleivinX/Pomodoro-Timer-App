@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { AuthProvider } from "@/lib/auth-context"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,46 +12,46 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "SaladTimer - Pomodoro Timer",
-  description: "A beautiful Pomodoro timer with music integration to boost your productivity",
+  title: "CRUMBO - Student Productivity Platform",
+  description: "Master your focus with Lock-In Calendar, XP-based gamification, and comprehensive study tools",
   manifest: "/manifest.json",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ef4444" },
-    { media: "(prefers-color-scheme: dark)", color: "#dc2626" },
+    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#1e40af" },
   ],
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "SaladTimer",
+    title: "CRUMBO",
   },
   formatDetection: {
     telephone: false,
   },
-  applicationName: "SaladTimer",
+  applicationName: "CRUMBO",
   other: {
     "mobile-web-app-capable": "yes",
     "msapplication-config": "/browserconfig.xml",
-    "msapplication-TileColor": "#ef4444",
+    "msapplication-TileColor": "#3b82f6",
     "msapplication-tap-highlight": "no",
   },
   icons: {
     icon: [
-      { url: "/saladtimer-logo.png", sizes: "32x32", type: "image/png" },
-      { url: "/saladtimer-logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
     ],
-    shortcut: "/saladtimer-logo.png",
-    apple: "/saladtimer-logo.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
   openGraph: {
     type: "website",
-    siteName: "SaladTimer",
-    title: "SaladTimer - Pomodoro Timer",
-    description: "A beautiful Pomodoro timer with music integration to boost your productivity",
+    siteName: "CRUMBO",
+    title: "CRUMBO - Student Productivity Platform",
+    description: "Master your focus with Lock-In Calendar, XP-based gamification, and comprehensive study tools",
   },
   twitter: {
     card: "summary",
-    title: "SaladTimer - Pomodoro Timer",
-    description: "A beautiful Pomodoro timer with music integration to boost your productivity",
+    title: "CRUMBO - Student Productivity Platform",
+    description: "Master your focus with Lock-In Calendar, XP-based gamification, and comprehensive study tools",
   },
     generator: 'v0.app'
 }
@@ -64,7 +65,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ThemeProvider>
         <script
           dangerouslySetInnerHTML={{

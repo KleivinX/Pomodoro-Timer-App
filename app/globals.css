@@ -275,3 +275,52 @@ html {
 body {
   font-feature-settings: "rlig" 1, "calt" 1;
 }
+
+/* New animations for CRUMBO */
+@keyframes levelUpPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes badgeRotate {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes streakFlame {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.level-up-pulse {
+  animation: levelUpPulse 1s ease-in-out infinite;
+}
+
+.badge-rotate {
+  animation: badgeRotate 0.6s ease-in-out;
+}
+
+.streak-flame {
+  animation: streakFlame 2s ease-in-out infinite;
+}
