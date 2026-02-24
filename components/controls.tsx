@@ -13,30 +13,29 @@ interface ControlsProps {
 
 export function Controls({ state, onStart, onPause, onReset }: ControlsProps) {
   return (
-    <div className="flex items-center justify-center gap-6 slide-in-up">
-      {/* Start/Pause Button */}
-      <Button
-        onClick={state === "running" ? onPause : onStart}
-        size="lg"
-        className={`
-          w-20 h-20 rounded-full shadow-lg
-          ${state === "running" ? "bg-secondary hover:bg-secondary/90 text-white" : "bg-primary hover:bg-primary/90 text-primary-foreground"}
-        `}
-        aria-label={state === "running" ? "Pause timer" : "Start timer"}
-      >
-        {state === "running" ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-1" />}
-      </Button>
-
+    <div className="flex items-center justify-center gap-5">
       {/* Reset Button */}
-      <Button
+      <button
         onClick={onReset}
-        variant="outline"
-        size="lg"
-        className="w-16 h-16 rounded-full border-2 border-border hover:border-primary hover:bg-primary/10 bg-background transition-colors"
+        className="game-btn w-14 h-14 rounded-full bg-muted text-foreground flex items-center justify-center"
         aria-label="Reset timer"
       >
         <RotateCcw className="h-5 w-5" />
-      </Button>
+      </button>
+
+      {/* Start/Pause Button — bigger, chunky */}
+      <button
+        onClick={state === "running" ? onPause : onStart}
+        className={`game-btn w-20 h-20 rounded-full flex items-center justify-center text-white ${
+          state === "running" ? "bg-secondary" : "bg-primary"
+        }`}
+        aria-label={state === "running" ? "Pause timer" : "Start timer"}
+      >
+        {state === "running" ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-1" />}
+      </button>
+
+      {/* Spacer to balance layout */}
+      <div className="w-14 h-14" />
     </div>
   )
 }

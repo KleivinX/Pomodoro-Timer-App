@@ -3,12 +3,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import { toast } from 'sonner'
+import { Flame, Star, Zap } from 'lucide-react'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -26,48 +25,22 @@ export default function SignupPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-
     try {
       const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
+        email, password,
         options: {
-          data: {
-            full_name: fullName,
-          },
+          data: { full_name: fullName },
           emailRedirectTo: `${window.location.origin}/dashboard`,
         },
       })
-
-      if (error) {
-        toast.error(error.message)
-        return
-      }
-
+      if (error) { toast.error(error.message); return }
       if (data?.user) {
-        // Create profile
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([
-            {
-              id: data.user.id,
-              email,
-              full_name: fullName,
-            },
-          ])
-
-        if (profileError) {
-          console.error('Profile creation error:', profileError)
-        }
-
-        toast.success('Account created! Redirecting...')
+        await supabase.from('profiles').insert([{ id: data.user.id, email, full_name: fullName }])
+        toast.success('Account created!')
         router.push('/dashboard')
       }
-    } catch (err) {
-      toast.error('An error occurred')
-    } finally {
-      setLoading(false)
-    }
+    } catch { toast.error('An error occurred') }
+    finally { setLoading(false) }
   }
 
   const handleGoogleSignUp = async () => {
@@ -75,112 +48,89 @@ export default function SignupPage() {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/onboarding`,
-        },
+        options: { redirectTo: `${window.location.origin}/onboarding` },
       })
-
-      if (error) {
-        toast.error(error.message)
-      }
-    } catch (err) {
-      toast.error('An error occurred')
-    } finally {
-      setLoading(false)
-    }
+      if (error) toast.error(error.message)
+    } catch { toast.error('An error occurred') }
+    finally { setLoading(false) }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-2 text-center">
-          <CardTitle className="text-3xl">Join CRUMBO</CardTitle>
-          <CardDescription>
-            Start your productivity journey today
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form onSubmit={handleSignup} className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="fullName" className="text-sm font-medium">
-                Full Name
-              </label>
-              <Input
-                id="fullName"
-                type="text"
-                placeholder="John Doe"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                disabled={loading}
-                required
-              />
-            </div>
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-6">
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={loading}
-                required
-              />
-            </div>
+        {/* Hero block */}
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 bg-primary border-2 border-border rounded-xl px-4 py-1.5 mb-2"
+            style={{ boxShadow: '3px 3px 0 #2D3436' }}>
+            <Flame className="w-4 h-4 text-primary-foreground" />
+            <span className="font-black text-primary-foreground text-sm">CRUMBO</span>
+          </div>
+          <h1 className="text-3xl font-black text-foreground">Stack your crumbs.</h1>
+          <p className="text-muted-foreground font-semibold text-sm">Turn daily study sessions into visible progress.</p>
+        </div>
 
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={loading}
-                required
-              />
+        {/* Perks row */}
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { icon: Flame, label: 'Streaks',   color: 'bg-destructive text-destructive-foreground' },
+            { icon: Star,  label: 'XP & Levels', color: 'bg-primary text-primary-foreground' },
+            { icon: Zap,   label: 'Lock-In',   color: 'bg-accent text-accent-foreground' },
+          ].map(({ icon: Icon, label, color }) => (
+            <div key={label} className={`game-card ${color} p-3 flex flex-col items-center gap-1 text-center`}>
+              <Icon className="w-5 h-5" />
+              <span className="text-xs font-bold">{label}</span>
             </div>
+          ))}
+        </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Creating account...' : 'Create Account'}
-            </Button>
+        {/* Form */}
+        <div className="game-card p-6 space-y-4">
+          <h2 className="font-black text-lg">Create your account</h2>
+          <form onSubmit={handleSignup} className="space-y-3">
+            <div className="space-y-1">
+              <label className="text-sm font-bold">Full Name</label>
+              <Input className="border-2 border-border font-semibold" placeholder="Your name"
+                value={fullName} onChange={e => setFullName(e.target.value)} disabled={loading} required />
+            </div>
+            <div className="space-y-1">
+              <label className="text-sm font-bold">Email</label>
+              <Input className="border-2 border-border font-semibold" type="email" placeholder="your@email.com"
+                value={email} onChange={e => setEmail(e.target.value)} disabled={loading} required />
+            </div>
+            <div className="space-y-1">
+              <label className="text-sm font-bold">Password</label>
+              <Input className="border-2 border-border font-semibold" type="password" placeholder="••••••••"
+                value={password} onChange={e => setPassword(e.target.value)} disabled={loading} required />
+            </div>
+            <button type="submit" disabled={loading}
+              className="game-btn w-full py-3 bg-primary text-primary-foreground text-sm">
+              {loading ? 'Creating account...' : 'Create Account — Free'}
+            </button>
           </form>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-muted-foreground/20" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-card px-2 text-muted-foreground">or</span>
-            </div>
+          <div className="relative flex items-center">
+            <div className="flex-1 border-t-2 border-border" />
+            <span className="mx-3 text-xs font-bold text-muted-foreground">or</span>
+            <div className="flex-1 border-t-2 border-border" />
           </div>
 
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={handleGoogleSignUp}
-            disabled={loading}
-          >
-            Sign up with Google
-          </Button>
+          <button onClick={handleGoogleSignUp} disabled={loading}
+            className="game-btn w-full py-3 bg-card text-foreground text-sm">
+            Continue with Google
+          </button>
 
-          <Button
-            type="button"
-            variant="ghost"
-            className="w-full"
-            onClick={handleGuestMode}
-            disabled={loading}
-          >
-            Continue as Guest
-          </Button>
-        </CardContent>
-      </Card>
+          <button onClick={handleGuestMode} disabled={loading}
+            className="w-full py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground border-2 border-dashed border-border rounded-xl transition-colors">
+            Explore as Guest
+          </button>
+        </div>
+
+        <p className="text-center text-sm text-muted-foreground font-semibold">
+          Already have an account?{' '}
+          <Link href="/login" className="text-primary font-black hover:underline">Log in</Link>
+        </p>
+      </div>
     </div>
   )
 }

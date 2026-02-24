@@ -8,30 +8,33 @@ export function SessionTracker({ completedSessions }: SessionTrackerProps) {
   const sessions = Array.from({ length: 8 }, (_, i) => i < completedSessions)
 
   return (
-    <div className="rounded-2xl p-6 text-center border-2 border-border bg-card shadow-md">
-      <h3 className="text-lg font-semibold mb-4">Completed Sessions</h3>
+    <div className="game-card p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-black text-sm">Sessions Today</h3>
+        <span className="text-2xl font-black text-primary">{completedSessions}</span>
+      </div>
 
-      <div className="flex items-center justify-center gap-2 mb-4">
+      {/* Dots — groups of 4 like Duolingo hearts */}
+      <div className="flex items-center gap-1.5 mb-3">
         {sessions.map((completed, index) => (
           <div
             key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              completed ? "bg-primary shadow-lg scale-110" : "bg-muted border-2 border-muted-foreground/20"
-            }`}
+            className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${
+              completed
+                ? "bg-primary border-primary scale-110"
+                : "bg-muted border-border"
+            } ${index === 3 || index === 7 ? "mr-2" : ""}`}
           />
         ))}
       </div>
 
-      <div className="text-2xl font-bold text-primary mb-1">{completedSessions}</div>
-      <div className="text-sm text-muted-foreground">
-        {completedSessions === 1 ? "session" : "sessions"} completed today
-      </div>
-
-      {completedSessions > 0 && completedSessions % 4 === 0 && (
-        <div className="mt-4 text-sm text-secondary font-medium">
-          🎉 Great job! You've completed {completedSessions / 4} full cycle{completedSessions / 4 !== 1 ? "s" : ""}!
-        </div>
-      )}
+      <p className="text-xs font-semibold text-muted-foreground">
+        {completedSessions === 0
+          ? "Start your first session!"
+          : completedSessions % 4 === 0
+          ? `Full cycle complete! Keep going!`
+          : `${4 - (completedSessions % 4)} more to complete a cycle`}
+      </p>
     </div>
   )
 }

@@ -191,7 +191,7 @@ export function PomodoroTimer() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 transition-all duration-300">
           {/* Main Timer Section */}
           <div className="lg:col-span-2 order-1">
-            <div className="rounded-2xl p-8 border-2 border-border bg-card shadow-md">
+            <div className="game-card p-8">
               <div className="space-y-8">
                 <ModeSelector
                   currentMode={mode}

@@ -82,12 +82,15 @@ export function ModeSelector({
               onClick={() => onModeChange(mode.id)}
               disabled={disabled}
               className={`
-                flex-1 px-3 py-3 rounded-xl border-2 font-semibold text-sm transition-colors
-                ${isActive ? mode.activeClass : "border-border bg-background text-foreground hover:border-primary hover:bg-primary/10"}
+                flex-1 px-3 py-3 rounded-xl border-2 font-bold text-sm
+                transition-[box-shadow,transform]
+                ${isActive
+                  ? `${mode.activeClass} shadow-[3px_3px_0_#2D3436]`
+                  : "border-border bg-card text-foreground hover:border-primary"}
                 ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
               `}
             >
-              <div className="font-semibold">{mode.label}</div>
+              <div className="font-bold">{mode.label}</div>
               <div className={`text-xs mt-0.5 ${isActive ? "opacity-80" : "text-muted-foreground"}`}>
                 {isCustom ? formatCustomDuration() : mode.description}
               </div>
@@ -97,7 +100,7 @@ export function ModeSelector({
       </div>
 
       {currentMode === "custom" && !disabled && (
-        <div className="glass-smooth rounded-xl p-4 border">
+        <div className="game-card p-4">
           {isEditingCustom ? (
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">

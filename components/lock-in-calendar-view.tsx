@@ -58,62 +58,56 @@ export function LockInCalendarView() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Current Streak</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-2">
-              <Flame className="w-6 h-6 text-orange-500" />
-              <div className="text-3xl font-bold">{streak.current}</div>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">days locked in</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Longest Streak</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-2">
-              <Flame className="w-6 h-6 text-red-500" />
-              <div className="text-3xl font-bold">{streak.longest}</div>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">personal best</p>
-          </CardContent>
-        </Card>
+    <div className="space-y-4">
+      {/* Streak row */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="game-card p-4 flex flex-col gap-1">
+          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Current Streak</span>
+          <div className="flex items-center gap-2 mt-1">
+            <Flame className="w-5 h-5 text-destructive" />
+            <span className="text-3xl font-black">{streak.current}</span>
+          </div>
+          <p className="text-xs font-semibold text-muted-foreground">days locked in</p>
+        </div>
+        <div className="game-card p-4 flex flex-col gap-1">
+          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Best Streak</span>
+          <div className="flex items-center gap-2 mt-1">
+            <Flame className="w-5 h-5 text-primary" />
+            <span className="text-3xl font-black">{streak.longest}</span>
+          </div>
+          <p className="text-xs font-semibold text-muted-foreground">personal best</p>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>30-Day Lock-In Calendar</CardTitle>
-          <CardDescription>Green = Locked In | Yellow = Partial | Gray = Missed</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {weeks.map((week, weekIndex) => (
-              <div key={weekIndex} className="grid grid-cols-7 gap-2">
-                {week.map((score, dayIndex) => (
-                  <div
-                    key={`${weekIndex}-${dayIndex}`}
-                    className={`aspect-square rounded-lg border-2 flex items-center justify-center cursor-pointer ${levelColors[score.lockInLevel]}`}
-                    title={`${score.date}: ${score.focusSessions} sessions, ${score.tasksCompleted} tasks, ${score.xpEarned} XP`}
-                  >
-                    {levelIcons[score.lockInLevel]}
-                  </div>
-                ))}
-                {week.length < 7 &&
-                  Array.from({ length: 7 - week.length }).map((_, i) => (
-                    <div key={`empty-${i}`} className="aspect-square" />
-                  ))}
-              </div>
-            ))}
+      {/* Calendar */}
+      <div className="game-card p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-black text-base">30-Day Lock-In</h3>
+          <div className="flex items-center gap-3 text-xs font-bold">
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-muted border border-border inline-block" /> Missed</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-primary border border-border inline-block" /> Partial</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-accent border border-border inline-block" /> Locked</span>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+        <div className="space-y-2">
+          {weeks.map((week, weekIndex) => (
+            <div key={weekIndex} className="grid grid-cols-7 gap-1.5">
+              {week.map((score, dayIndex) => (
+                <div
+                  key={`${weekIndex}-${dayIndex}`}
+                  className={`aspect-square rounded-lg border-2 flex items-center justify-center cursor-pointer transition-transform hover:scale-110 ${levelColors[score.lockInLevel]}`}
+                  title={`${score.date}: ${score.focusSessions} sessions, ${score.tasksCompleted} tasks, ${score.xpEarned} XP`}
+                >
+                  {levelIcons[score.lockInLevel]}
+                </div>
+              ))}
+              {week.length < 7 && Array.from({ length: 7 - week.length }).map((_, i) => (
+                <div key={`empty-${i}`} className="aspect-square" />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

@@ -56,7 +56,7 @@ export function TaskManager() {
   const totalCount = tasks.length
 
   return (
-    <Card className="rounded-2xl p-6 border-2 border-border bg-card shadow-md">
+    <Card className="game-card p-6 border-0">
       <div className="space-y-4">
         {/* Header */}
         <div

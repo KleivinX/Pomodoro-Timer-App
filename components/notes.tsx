@@ -108,7 +108,7 @@ export function Notes() {
 
   return (
     <Card
-      className="rounded-2xl p-6 border-2 border-border bg-card shadow-md"
+      className="game-card p-6"
     >
       <div className="space-y-4">
         {/* Header */}

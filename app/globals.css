@@ -3,43 +3,55 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── CRUMBO DESIGN TOKENS ──────────────────────────────── */
 :root {
-  /* Gold-based color palette */
-  --background: #FFFFFF;
+  --background: #FFFDF5;
   --foreground: #2D3436;
-  --card: #F5B041;
+  --card: #FFFFFF;
   --card-foreground: #2D3436;
-  --popover: #F5B041;
+  --popover: #FFFFFF;
   --popover-foreground: #2D3436;
+
   --primary: #F5B041;
   --primary-foreground: #2D3436;
   --secondary: #D35400;
   --secondary-foreground: #FFFFFF;
-  --muted: #E8D0B8;
-  --muted-foreground: #2D3436;
   --accent: #00BFA5;
   --accent-foreground: #FFFFFF;
   --destructive: #E74C3C;
   --destructive-foreground: #FFFFFF;
-  --border: #D35400;
-  --input: #F5B041;
-  --ring: #00BFA5;
-  --chart-1: #F5B041;
-  --chart-2: #D35400;
-  --chart-3: #00BFA5;
-  --chart-4: #E74C3C;
-  --chart-5: #2D3436;
-  --radius: 0.625rem;
-  --sidebar: #F5B041;
-  --sidebar-foreground: #2D3436;
-  --sidebar-primary: #D35400;
-  --sidebar-primary-foreground: #FFFFFF;
+
+  --muted: #F0EBE0;
+  --muted-foreground: #7A7068;
+  --border: #2D3436;
+  --input: #FFFFFF;
+  --ring: #F5B041;
+
+  /* Gamification tokens */
+  --xp-bar-bg: #E8D0B8;
+  --xp-bar-fill: #F5B041;
+  --streak-color: #E74C3C;
+  --locked-color: #00BFA5;
+  --partial-color: #F5B041;
+  --deep-color: #D35400;
+
+  /* Card shadow offset — Duolingo-style */
+  --shadow-offset: 4px;
+  --shadow-color: #2D3436;
+
+  --radius: 0.75rem;
+
+  /* Sidebar */
+  --sidebar: #2D3436;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #F5B041;
+  --sidebar-primary-foreground: #2D3436;
   --sidebar-accent: #00BFA5;
   --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #D35400;
-  --sidebar-ring: #00BFA5;
+  --sidebar-border: #1A1F20;
+  --sidebar-ring: #F5B041;
 
-  /* Mode-specific colors */
+  /* Timer modes */
   --pomodoro: #E74C3C;
   --pomodoro-foreground: #FFFFFF;
   --short-break: #00BFA5;
@@ -50,39 +62,39 @@
 
 .dark {
   --background: #1A1A1A;
-  --foreground: #FFFFFF;
-  --card: #D35400;
-  --card-foreground: #FFFFFF;
-  --popover: #D35400;
-  --popover-foreground: #FFFFFF;
+  --foreground: #F5F5F0;
+  --card: #252525;
+  --card-foreground: #F5F5F0;
+  --popover: #252525;
+  --popover-foreground: #F5F5F0;
+
   --primary: #F5B041;
   --primary-foreground: #2D3436;
-  --secondary: #00BFA5;
+  --secondary: #D35400;
   --secondary-foreground: #FFFFFF;
-  --muted: #2D3436;
-  --muted-foreground: #FFFFFF;
   --accent: #00BFA5;
-  --accent-foreground: #2D3436;
+  --accent-foreground: #FFFFFF;
   --destructive: #E74C3C;
   --destructive-foreground: #FFFFFF;
-  --border: #2D3436;
-  --input: #2D3436;
-  --ring: #00BFA5;
-  --chart-1: #F5B041;
-  --chart-2: #D35400;
-  --chart-3: #00BFA5;
-  --chart-4: #E74C3C;
-  --chart-5: #FFFFFF;
-  --sidebar: #2D3436;
-  --sidebar-foreground: #FFFFFF;
+
+  --muted: #2D2D2D;
+  --muted-foreground: #9A9590;
+  --border: #F5B041;
+  --input: #252525;
+  --ring: #F5B041;
+
+  --xp-bar-bg: #2D2D2D;
+  --xp-bar-fill: #F5B041;
+
+  --sidebar: #141414;
+  --sidebar-foreground: #F5F5F0;
   --sidebar-primary: #F5B041;
   --sidebar-primary-foreground: #2D3436;
   --sidebar-accent: #00BFA5;
-  --sidebar-accent-foreground: #2D3436;
-  --sidebar-border: #2D3436;
-  --sidebar-ring: #00BFA5;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #0A0A0A;
+  --sidebar-ring: #F5B041;
 
-  /* Dark mode mode-specific colors */
   --pomodoro: #E74C3C;
   --pomodoro-foreground: #FFFFFF;
   --short-break: #00BFA5;
@@ -92,7 +104,8 @@
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --font-sans: "Inter", sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -103,24 +116,16 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -130,195 +135,131 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Added mode-specific color tokens */
   --color-pomodoro: var(--pomodoro);
   --color-pomodoro-foreground: var(--pomodoro-foreground);
   --color-short-break: var(--short-break);
   --color-short-break-foreground: var(--short-break-foreground);
   --color-long-break: var(--long-break);
   --color-long-break-foreground: var(--long-break-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* ─── BASE ───────────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
   }
-  
   button {
-    @apply font-medium;
+    @apply font-semibold;
   }
 }
 
-/* Custom animations */
+/* ─── GAMIFIED CARD — thick border + shadow offset ───────── */
+.game-card {
+  background: var(--card);
+  border: 2.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow-color);
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
+}
+.game-card:hover {
+  box-shadow: 3px 3px 0 var(--shadow-color);
+  transform: translate(-1px, -1px);
+}
+
+/* ─── GAMIFIED BUTTON ─────────────────────────────────────── */
+.game-btn {
+  border: 2.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 3px 3px 0 var(--shadow-color);
+  font-weight: 700;
+  transition: box-shadow 0.08s ease, transform 0.08s ease;
+}
+.game-btn:hover {
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  transform: translate(1px, 1px);
+}
+.game-btn:active {
+  box-shadow: 0px 0px 0 var(--shadow-color);
+  transform: translate(3px, 3px);
+}
+
+/* ─── XP PROGRESS BAR ─────────────────────────────────────── */
+.xp-bar-track {
+  background: var(--xp-bar-bg);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  background: var(--xp-bar-fill);
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ─── STREAK CHIP ─────────────────────────────────────────── */
+.streak-chip {
+  background: var(--destructive);
+  color: var(--destructive-foreground);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
 @keyframes confetti {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(720deg);
-    opacity: 0;
-  }
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+@keyframes pop-in {
+  0%   { transform: scale(0.8); opacity: 0; }
+  70%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes slide-in-up {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+@keyframes slide-up {
+  0%   { transform: translateY(12px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
-.float {
-  animation: float 4s ease-in-out infinite;
+@keyframes xp-flash {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
 }
 
-.slide-in-up {
-  animation: slide-in-up 0.3s ease-out forwards;
-}
+.pop-in    { animation: pop-in 0.25s ease forwards; }
+.slide-up  { animation: slide-up 0.2s ease forwards; }
+.xp-flash  { animation: xp-flash 0.6s ease 2; }
 
-/* Optimized for performance - only animate when necessary */
-.btn-smooth {
-  transition: background-color 0.15s ease-out, color 0.15s ease-out;
-  will-change: auto;
-}
-
-.btn-smooth:hover {
-  transform: none;
-}
-
-.btn-smooth:active {
-  transform: none;
-}
-
-.glass-smooth {
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  transition: all 0.2s ease-out;
-}
-
-.glass-smooth:hover {
-  backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.dark .glass-smooth {
-  background: rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark .glass-smooth:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* Auto scrolling for performance */
-html {
-  scroll-behavior: auto;
-}
-
-/* Enhanced focus states for accessibility */
-*:focus-visible {
-  outline: 2px solid var(--color-ring);
-  outline-offset: 2px;
-  transition: outline 0.2s ease-in-out;
-}
-
-/* Glassmorphism effects */
-.glass {
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .glass {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-muted);
-}
-
+/* ─── SCROLLBAR ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--muted); }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-muted-foreground);
-  border-radius: 4px;
+  background: var(--muted-foreground);
+  border-radius: 3px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground);
+/* ─── FOCUS RING ──────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2.5px solid var(--ring);
+  outline-offset: 2px;
 }
 
-body {
-  font-feature-settings: "rlig" 1, "calt" 1;
-}
-
-/* New animations for CRUMBO */
-@keyframes levelUpPulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes badgeRotate {
-  0% {
-    transform: rotate(-10deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes streakFlame {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-.level-up-pulse {
-  animation: levelUpPulse 1s ease-in-out infinite;
-}
-
-.badge-rotate {
-  animation: badgeRotate 0.6s ease-in-out;
-}
-
-.streak-flame {
-  animation: streakFlame 2s ease-in-out infinite;
-}
+html { scroll-behavior: auto; }
+body { font-feature-settings: "rlig" 1, "calt" 1; }
