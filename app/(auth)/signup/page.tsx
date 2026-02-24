@@ -53,8 +53,8 @@ export default function SignupPage() {
           console.error('Profile creation error:', profileError)
         }
 
-        toast.success('Account created! Check your email to verify.')
-        router.push('/login')
+        toast.success('Account created! Redirecting...')
+        router.push('/dashboard')
       }
     } catch (err) {
       toast.error('An error occurred')
@@ -163,12 +163,7 @@ export default function SignupPage() {
             Sign up with Google
           </Button>
 
-          <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{' '}
-            <Link href="/login" className="text-primary hover:underline font-medium">
-              Sign in
-            </Link>
-          </p>
+
         </CardContent>
       </Card>
     </div>
