@@ -106,7 +106,7 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
 
         {/* Timer Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className={`text-5xl sm:text-6xl font-mono font-bold tracking-tight ${getModeColor()} transition-all duration-200 ease-out`}>
+          <div className={`text-4xl sm:text-5xl font-mono font-bold tracking-tight whitespace-nowrap ${getModeColor()} transition-all duration-200 ease-out`}>
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
           <div className="text-sm text-muted-foreground mt-2 transition-all duration-200 opacity-80">
