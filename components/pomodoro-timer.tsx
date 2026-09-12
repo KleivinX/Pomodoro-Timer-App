@@ -128,10 +128,10 @@ export function PomodoroTimer() {
 
   const handleReset = useCallback(() => {
     setState("idle")
-    setTimeLeft(TIMER_DURATIONS[mode])
+    setTimeLeft(mode === "custom" ? customDuration : TIMER_DURATIONS[mode])
     setStartTime(null)
     setPausedTime(null)
-  }, [mode])
+  }, [mode, customDuration])
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout

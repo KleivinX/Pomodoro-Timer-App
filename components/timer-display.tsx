@@ -65,9 +65,9 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
   }
 
   const { radius, circumference, strokeDashoffset } = useMemo(() => {
-    const r = 120
+    const r = 124
     const c = 2 * Math.PI * r
-    const offset = c - (progress / 100) * c
+    const offset = c - (Math.min(100, Math.max(0, progress)) / 100) * c
     return { radius: r, circumference: c, strokeDashoffset: offset }
   }, [progress])
 
@@ -106,7 +106,7 @@ export function TimerDisplay({ timeLeft, progress, mode, state }: TimerDisplayPr
 
         {/* Timer Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className={`text-6xl font-mono font-bold ${getModeColor()} transition-all duration-200 ease-out`}>
+          <div className={`text-5xl sm:text-6xl font-mono font-bold tracking-tight ${getModeColor()} transition-all duration-200 ease-out`}>
             {formatTime(minutes)}:{formatTime(seconds)}
           </div>
           <div className="text-sm text-muted-foreground mt-2 transition-all duration-200 opacity-80">
